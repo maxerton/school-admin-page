@@ -1,0 +1,92 @@
+:root {
+    --bg-general: #17a2b7;
+    --bg-general2: #9ed6e0;
+    --bg-page: #fff;
+}
+
+.navbar-custom-color {
+    background-color: var(--bg-general);
+}
+
+.date-time-style {
+    padding: 2rem;
+    font-family: sans-serif;
+    transform: scaleY(1.1);
+}
+
+a {
+    color: var(--bg-general);
+}
+
+.h-button {
+    background-color: var(--bg-general);
+    border: none;
+}
+
+.h-button:hover {
+    background-color: #0c6d7c;
+}
+
+.card-block {
+    padding: 10px;
+}
+
+.card-block .name {
+    font-size: 0.8rem;
+    color: #6c6c6c;
+}
+
+.present-radio {
+    height: 100%;
+    min-width: 25px;
+}
+
+.present-radio input:nth-child(1) {
+    filter: hue-rotate(270deg);
+}
+
+.present-radio input:nth-child(2) {
+    filter: hue-rotate(207deg) saturate(4);
+
+}
+
+.present-radio input:nth-child(3) {
+    filter: hue-rotate(123deg) saturate(2);
+
+}
+
+.my-table thead {
+    background-color: var(--bg-general2);
+    color: #fff;
+}
+.my-table th {
+    font-weight: 400;
+    text-align: center;
+}
+
+.my-table td {
+    height: 35px;
+}
+
+.my-table i.fa {
+    color: var(--bg-general);
+}
+
+.my-table tr td:first-child span:first-child {
+    padding: 0 0.5rem;
+}
+
+.sep {
+    padding: 1rem 0;
+}
+
+.l-h-15 {
+    line-height: 1.5;
+    height: 100%;
+}
+
+@media screen and (min-width: 1400px) {
+    body {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-dark navbar-custom-color">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-user-graduate"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-sm-between" id="collapsibleNavbar">
+        <ul class="nav navbar-nav" id="mainTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance-tab-pane"
+              type="button" role="tab" aria-controls="attendance-tab-pane" aria-selected="true">Attendance</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="shedule-tab" data-bs-toggle="tab" data-bs-target="#shedule-tab-pane" type="button"
+              role="tab" aria-controls="shedule-tab-pane" aria-selected="false">Shedule</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="homework-tab" data-bs-toggle="tab" data-bs-target="#homework-tab-pane" type="button"
+              role="tab" aria-controls="homework-tab-pane" aria-selected="false">Homework</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fa fa-bell" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fa fa-door-open"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="tab-content" id="mainTabContent">
+      <div class="tab-pane fade show active" id="attendance-tab-pane" role="tabpanel" aria-labelledby="attendance-tab"
+        tabindex="0">
+        <div class="row justify-content-center">
+          <div class="text-center date-time-style">
+            {{date}}
+          </div>
+        </div>
+
+        <ul class="nav nav-tabs" id="attendance_tabs" role="tablist">
+          
+          
+          <li class="nav-item" role="presentation" v-for="(lesson, index) in od.attendance">
+            <button class="nav-link" :id="'lesson-tab-'+index" data-bs-toggle="tab"
+              :data-bs-target="'#lesson-tab-pane-'+index" type="button" role="tab" :aria-controls="'lesson-tab-pane-'+index"
+              :aria-selected="(index == 0) ? 'true' : 'false'" :class="{active: index==0}">{{ lesson.name }}</button>
+          </li>
+        </ul>
+
+        
+        
+        <div class="tab-content" id="attendance_tabs_content">
+          <div class="tab-pane fade show active" id="lesson-tab-pane-0" role="tabpanel" aria-labelledby="lesson-tab-0"
+            :tabindex="index" v-for="(lesson, index) in od.attendance" v-if="index == 0">
+            <div class="row justify-content-around text-center text-md-start sep">
+              <div class="col-12 col-md-2">
+                <div class="card-block">
+                  <div class="name">Group</div>
+                  <div class="value">{{od.groups[0].name}}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <div class="card-block">
+                  <div class="name">Subject</div>
+                  <div class="value">{{od.groups[0].subject}}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="card-block">
+                  <div class="name">Lesson topic</div>
+                  <div class="value"><input type="text" class="form-control"></div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="card-block">
+                  <div class="name">Homework</div>
+                  <div class="value"><button class="btn btn-primary h-button"  data-bs-toggle="modal" data-bs-target="#homeworkModal">Add Homework</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <table class="table my-table">
+                <thead>
+                  <tr>
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      GPA
+                    </th>
+                    <th>
+                      Is present
+                    </th>
+                    <th>
+                      Test
+                    </th>
+                    <th>
+                      Classwork
+                    </th>
+                    <th>
+                      Comment
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(st, index_st) in od.groups[0].students">
+                    <td><span>{{index_st + 1}}</span> <span>{{st.name}}</span></td>
+                    <td>{{st.GPA}}</td>
+                    <td>
+                      <div class="d-flex align-items-center justify-content-around present-radio">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                      </div>
+                    </td>
+                    <td>
+                      <select class="form-select">
+                        <option selected disabled>-</option>
+                        <option :value="i" v-for="i in 12">{{i}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="form-select">
+                        <option selected disabled>-</option>
+                        <option :value="i" v-for="i in 12">{{i}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="1"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          
+          <div class="tab-pane fade" :id="'lesson-tab-pane-'+index" role="tabpanel" :aria-labelledby="'lesson-tab-'+index"
+            :tabindex="index" v-for="(lesson, index) in od.attendance" v-if="index > 0">
+            <div class="row justify-content-around text-center text-md-start sep">
+              <div class="col-12 col-md-2">
+                <div class="card-block">
+                  <div class="name">Group</div>
+                  <div class="value">{{od.groups[0].name}}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <div class="card-block">
+                  <div class="name">Subject</div>
+                  <div class="value">{{od.groups[0].subject}}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="card-block">
+                  <div class="name">Lesson topic</div>
+                  <div class="value"><input type="text" class="form-control"></div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="card-block">
+                  <div class="name">Homework</div>
+                  <div class="value"><button class="btn btn-primary h-button"  data-bs-toggle="modal" data-bs-target="#homeworkModal">Add Homework</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <table class="table my-table">
+                <thead>
+                  <tr>
+                    <th>
+                      Name
+                    </th>
+                    <th>
+                      GPA
+                    </th>
+                    <th>
+                      Is present
+                    </th>
+                    <th>
+                      Test
+                    </th>
+                    <th>
+                      Classwork
+                    </th>
+                    <th>
+                      Comment
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(st, index_st) in od.groups[0].students">
+                    <td><span>{{index_st + 1}}</span> <span>{{st.name}}</span></td>
+                    <td>{{st.GPA}}</td>
+                    <td>
+                      <div class="d-flex align-items-center justify-content-around present-radio">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                        <input type="radio" :name="'pres_'+index+'-'+index_st" id="">
+                      </div>
+                    </td>
+                    <td>
+                      <select class="form-select">
+                        <option selected disabled>-</option>
+                        <option :value="i" v-for="i in 12">{{i}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="form-select">
+                        <option selected disabled>-</option>
+                        <option :value="i" v-for="i in 12">{{i}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="1"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="shedule-tab-pane" role="tabpanel" aria-labelledby="shedule-tab" tabindex="1">
+
+      </div>
+
+      <div class="tab-pane fade" id="homework-tab-pane" role="tabpanel" aria-labelledby="homework-tab" tabindex="2">
+        <div class="row justify-content-center">
+          <div class="text-center date-time-style text-uppercase">
+            Homework
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 col-xl-2">
+            <div class="card-block">
+              <div class="name">Group</div>
+              <div class="value">
+                <select class="form-select">
+                  <option value="" v-for="op in od.groups">{{op.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 col-xl-2">
+            <div class="card-block">
+              <div class="name">Subject</div>
+              <div class="value">
+                <select class="form-select">
+                  <option value="" v-for="op in od.groups" :key="op.subject">{{op.subject}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 col-xl-2">
+            <div class="card-block">
+              <div class="name">&nbsp;</div>
+              <div class="value">
+                <button class="btn btn-primary h-button">Show</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <table class="table my-table">
+            <thead>
+              <tr>
+                <th>
+                  Name
+                </th>
+                <th>
+                  18.04
+                </th>
+                <th>
+                  14.04
+                </th>
+                <th>
+                  12.04
+                </th>
+                <th>
+                  10.04
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(st, index_st) in od.groups[0].students">
+                <td>
+                  <span>{{index_st + 1}}</span> <span>{{st.name}}</span>
+                </td>
+                <td v-for="day in od.homeworks[index_st]">
+                  <div class="d-flex align-items-center justify-content-center text-center l-h-15">
+                    <i class="fa fa-file-code" style="display: inline-block; padding-right: 0.5rem;" aria-hidden="true" v-if="day.type == 'file'"></i>
+                    <i class="fa fa-link" style="display: inline-block; padding-right: 0.5rem;" aria-hidden="true" v-if="day.type == 'link'"></i>
+                    <i class="fa fa-minus" aria-hidden="true" v-if="day.type == 'null'"></i>
+                    <select class="form-select" style="padding-left: 1rem;" v-if="day.type != 'null'">
+                      <option value="" v-for="i in 12" :selected="i == day.grade">{{i}}</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="homeworkModal" tabindex="-1" aria-labelledby="homeworkModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New homework</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <form action="/upload" method="POST" id="modal_form">
+            <div class="mb-3">
+              <label for="topic" class="form-label">Topic:</label>
+              <input type="text" class="form-control" id="topic">
+            </div>
+            <div class="mb-3">
+              <input type="file" class="form-control" placeholder="Choose file..." id="upFile">
+            </div>
+            
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="modal_form">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="static/js/bootstrap.bundle.min.js"></script>
+<script src="static/js/vue.js"></script>
+<script>
+  let data_n = {};
+
+
+  function loadXMLDoc() {
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
+        if (xmlhttp.status == 200) {
+          main_vue.od = JSON.parse(xmlhttp.responseText);
+        }
+        else if (xmlhttp.status == 400) {
+          alert('There was an error 400');
+        }
+        else {
+          alert('something else other than 200 was returned');
+        }
+      }
+    };
+
+    xmlhttp.open("GET", "data.json", true);
+    xmlhttp.send();
+
+  }
+
+  loadXMLDoc();
+
+
+  let d = new Date();
+  let date_n = d.getDate() + " " + d.toLocaleString('en', { month: 'long' }) + ', ' + d.toLocaleString('en', { weekday: 'long' })
+
+  let main_vue = new Vue({
+    data: {
+      date: date_n,
+      od: "jdvndjvnd"
+    },
+    el: "#mainTabContent"
+  });
+
+</script>
+
+</html>

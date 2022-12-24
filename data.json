@@ -1,0 +1,174 @@
+{
+    "attendance": [
+        {
+            "name": "Lesson1"
+        },
+        {
+            "name": "Lesson2"
+        },
+        {
+            "name": "Lesson3"
+        },
+        {
+            "name": "Lesson4"
+        },
+        {
+            "name": "Lesson5"
+        },
+        {
+            "name": "Lesson6"
+        },
+        {
+            "name": "Lesson7"
+        },
+        {
+            "name": "Lesson8"
+        }
+    ],
+    "groups": [
+        {
+            "name": "ABC-1234",
+            "subject": "HTML&CSS",
+            "students": [
+                {
+                    "name": "Ashton Hickman",
+                    "GPA": 10,
+                    "present": [
+                        {}
+                    ],
+                    "test": [
+                        {}
+                    ],
+                    "classwork": [
+                        {}
+                    ],
+                    "comments": [
+                        {}
+                    ]
+                },
+                {
+                    "name": "Mischa Roberson",
+                    "GPA": 9,
+                    "present": [
+                        {}
+                    ],
+                    "test": [
+                        {}
+                    ],
+                    "classwork": [
+                        {}
+                    ],
+                    "comments": [
+                        {}
+                    ]
+                },
+                {
+                    "name": "Jayton Metcalife",
+                    "GPA": 11,
+                    "present": [
+                        {}
+                    ],
+                    "test": [
+                        {}
+                    ],
+                    "classwork": [
+                        {}
+                    ],
+                    "comments": [
+                        {}
+                    ]
+                },
+                {
+                    "name": "Gary Jacobson",
+                    "GPA": 8,
+                    "present": [
+                        {}
+                    ],
+                    "test": [
+                        {}
+                    ],
+                    "classwork": [
+                        {}
+                    ],
+                    "comments": [
+                        {}
+                    ]
+                }
+            ]
+        }
+    ],
+    "homeworks": [
+        [
+            {
+                "type": "link",
+                "grade": 8
+            },
+            {
+                "type": "null",
+                "grade": 0
+            },
+            {
+                "type": "null",
+                "grade": 3
+            },
+            {
+                "type": "file",
+                "grade": 10
+            }
+        ],
+        [
+            {
+                "type": "null",
+                "grade": 8
+            },
+            {
+                "type": "link",
+                "grade": 12
+            },
+            {
+                "type": "file",
+                "grade": 10
+            },
+            {
+                "type": "file",
+                "grade": 10
+            }
+        ],
+        [
+            {
+                "type": "null",
+                "grade": 8
+            },
+            {
+                "type": "file",
+                "grade": 7
+            },
+            {
+                "type": "null",
+                "grade": 3
+            },
+            {
+                "type": "null",
+                "grade": 10
+            }
+        ],
+        [
+            {
+                "type": "link",
+                "grade": 10
+            },
+            {
+                "type": "link",
+                "grade": 9
+            },
+            {
+                "type": "file",
+                "grade": 12
+            },
+            {
+                "type": "link",
+                "grade": 11
+            }
+        ]
+    ]
+}
